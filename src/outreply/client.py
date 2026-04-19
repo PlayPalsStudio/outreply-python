@@ -44,7 +44,7 @@ class PostsResource(_Resource):
         *,
         page_id: str,
         message: str,
-        publish_at: str,
+        scheduled_at: str,
         media_ids: Optional[List[str]] = None,
         link: Optional[str] = None,
         first_comment: Optional[str] = None,
@@ -54,7 +54,7 @@ class PostsResource(_Resource):
         payload = {
             "page_id": page_id,
             "message": message,
-            "publish_at": publish_at,
+            "scheduled_at": scheduled_at,
             "media_ids": media_ids,
             "link": link,
             "first_comment": first_comment,

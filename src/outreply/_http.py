@@ -11,7 +11,7 @@ import httpx
 from .errors import OutReplyConnectionError, error_from_response
 
 DEFAULT_BASE = "https://api.outreply.com/api/v1"
-SDK_VERSION = "1.0.0"
+SDK_VERSION = "1.0.1"
 MUTATING = {"POST", "PATCH", "PUT", "DELETE"}
 
 

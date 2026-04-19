@@ -22,7 +22,7 @@ print(f"Signed in as {me['email']}")
 post = client.posts.schedule(
     page_id="65f...",
     message="Launching tomorrow 🚀",
-    publish_at="2026-05-01T10:00:00Z",
+    scheduled_at="2026-05-01T10:00:00Z",
 )
 
 # 3. Subscribe to real-time events
@@ -91,7 +91,7 @@ from outreply import (
 )
 
 try:
-    client.posts.schedule(page_id="...", message="...", publish_at="...")
+    client.posts.schedule(page_id="...", message="...", scheduled_at="...")
 except OutReplyValidationError as err:
     print("Bad input:", err.details)
 except OutReplyRateLimitError as err:
@@ -105,7 +105,6 @@ except OutReplyQuotaError:
 ```python
 client = OutReply(
     api_key=os.environ["OUTREPLY_API_KEY"],
-    base_url="https://api.outreply.com/api/v1",
     timeout=30.0,
     max_retries=2,              # 3 attempts total
     default_headers={"X-Tenant": "acme-co"},

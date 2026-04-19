@@ -25,7 +25,7 @@ def test_bearer_auth_and_idempotency(httpx_mock, client):
     client.posts.schedule(
         page_id="page_1",
         message="hi",
-        publish_at="2026-05-01T10:00:00Z",
+        scheduled_at="2026-05-01T10:00:00Z",
     )
     req = httpx_mock.get_requests()[-1]
     assert req.headers["authorization"] == "Bearer outreply_test_x"
@@ -51,4 +51,4 @@ def test_422_maps_to_validation_error(httpx_mock, client):
         status_code=422,
     )
     with pytest.raises(OutReplyValidationError):
-        client.posts.schedule(page_id="", message="", publish_at="")
+        client.posts.schedule(page_id="", message="", scheduled_at="")
