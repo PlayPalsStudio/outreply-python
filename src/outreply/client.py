@@ -62,6 +62,34 @@ class PostsResource(_Resource):
         payload = {k: v for k, v in payload.items() if v is not None}
         return self._http.request("POST", "/posts/schedule", json=payload, idempotency_key=idempotency_key)
 
+    def publish(
+        self,
+        *,
+        page_id: str,
+        message: Optional[str] = None,
+        media_ids: Optional[List[str]] = None,
+        media_urls: Optional[List[str]] = None,
+        first_comment: Optional[str] = None,
+        tiktok_settings: Optional[Mapping[str, Any]] = None,
+        idempotency_key: Union[str, bool, None] = True,
+    ) -> dict:
+        """Publish a post **immediately** (no scheduling).
+
+        Blocks until the upstream platform accepts the post — expect
+        multi-second latency for large media uploads. Idempotency-safe
+        by default.
+        """
+        payload = {
+            "page_id": page_id,
+            "message": message,
+            "media_ids": media_ids,
+            "media_urls": media_urls,
+            "first_comment": first_comment,
+            "tiktok_settings": dict(tiktok_settings) if tiktok_settings is not None else None,
+        }
+        payload = {k: v for k, v in payload.items() if v is not None}
+        return self._http.request("POST", "/posts/publish", json=payload, idempotency_key=idempotency_key)
+
     def list_scheduled(
         self,
         *,

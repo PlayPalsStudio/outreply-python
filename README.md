@@ -25,6 +25,14 @@ post = client.posts.schedule(
     scheduled_at="2026-05-01T10:00:00Z",
 )
 
+# 2b. …or publish one right now.
+live = client.posts.publish(
+    page_id="65f...",
+    message="We're live! 🎉",
+    media_urls=["https://cdn.example.com/hero.jpg"],
+)
+print(live["platform_post_id"])
+
 # 3. Subscribe to real-time events
 hook = client.webhooks.create(
     url="https://example.com/webhooks/outreply",
